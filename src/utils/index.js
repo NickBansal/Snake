@@ -5,3 +5,9 @@ export const createArray = rows => {
     }
     return arr;
 }
+
+export const generateRandomFood = num => {
+    const i = Math.floor(Math.random() * num)
+    const j = Math.floor(Math.random() * num)
+    return [i, j]
+}

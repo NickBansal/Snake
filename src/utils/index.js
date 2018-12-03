@@ -1,13 +1,3 @@
-export const createGameBoard = rows => {
-    const index = Math.floor(rows/2)
-    const arr = [];
-    for (let i = 0; i < rows; i++) {
-        arr[i] = Array(rows).fill(0)
-    }
-    arr[index][index] = 1
-    return arr;
-}
-
 export const createEmptyGameBoard = rows => {
     const arr = [];
     for (let i = 0; i < rows; i++) {
@@ -16,15 +6,20 @@ export const createEmptyGameBoard = rows => {
     return arr;
 }
 
+export const createGameBoard = rows => {
+    const index = Math.floor(rows/2)
+    const grid = createEmptyGameBoard(rows)
+    grid[index][index] = 1
+    grid[index+1][index] = 1
+    grid[index+2][index] = 1
+    grid[index+3][index] = 1
+    return grid;
+}
+
 export const generateRandomFood = num => {
     const i = Math.floor(Math.random() * num)
     const j = Math.floor(Math.random() * num)
     return [i, j]
-}
-
-export const updatedGridWithNewFood = (grid, foodArray) => {
-    grid[foodArray[0]][foodArray[1]] = 2
-    return grid
 }
 
 export const updateGrid = (grid, changedArray) => {
@@ -55,22 +50,40 @@ export const updatedSnakeArray = grid => {
 export const moveSnake = (grid, direction) => {
     const snakeArray = updatedSnakeArray(grid)
     const lastSnakeArrayitem = snakeArray[snakeArray.length - 1]
-    const newArray = []
+    const firstSnakeArrayItem = snakeArray[0]
     switch (direction) {
         case 'ArrowUp':
-        newArray.push(moveUp(lastSnakeArrayitem))
+        snakeArray.pop()
+        snakeArray.push(moveUp(firstSnakeArrayItem))
+        // console.log(snakeArray)
         break;
         case 'ArrowDown':
-        newArray.push(moveDown(lastSnakeArrayitem))
+        snakeArray.shift()
+        snakeArray.push(moveDown(lastSnakeArrayitem))
+        // console.log(snakeArray)
         break;
         case 'ArrowLeft':
-        newArray.push(moveLeft(lastSnakeArrayitem))
+        snakeArray.pop()
+        snakeArray.push(moveLeft(firstSnakeArrayItem))
+        console.log(snakeArray)
         break;
         case 'ArrowRight':
-        newArray.push(moveRight(lastSnakeArrayitem))
+        snakeArray.shift()
+        snakeArray.push(moveRight(lastSnakeArrayitem))
+        console.log(snakeArray.sort(sortArrayValues))
         break;
         default:
         return snakeArray
     } 
-    return newArray
+    return snakeArray
+}
+
+export const sortArrayValues = (a, b) => {
+    if (a[0] > b[0]) return -1;
+    else if (a[0] < b[0]) return 1;
+    else if (a[0] === b[0]) {
+        if (a[1] > b[1]) return -1;
+        if (a[1] < b[1]) return 1;
+    }
+    return 0;
 }

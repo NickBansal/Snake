@@ -1,5 +1,6 @@
 import { 
     createGameBoard, 
+    createEmptyGameBoard,
     updatedGridWithNewFood, 
     moveUp, 
     moveDown,
@@ -11,6 +12,13 @@ import {
 
 
 describe('Util fucntions testing', () => {
+
+    // Creates a new empty GameBoard
+    it('Checks that create Array return the correct 2D array', () => {
+        expect(createEmptyGameBoard(1)).toEqual([[0]])
+        expect(createEmptyGameBoard(2)).toEqual([[0, 0], [0, 0]])
+        expect(createEmptyGameBoard(3)).toEqual([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+    })
 
     // Creates a new grid
     it('Create Array functions creates a 2D array with a specified amount', () => {

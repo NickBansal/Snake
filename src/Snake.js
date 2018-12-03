@@ -23,11 +23,11 @@ class App extends Component {
                 <div key={'i'+ i} className="Rows">
                     {item.map((square, j) => {
                         return (
-                            <div 
-                            key={'j'+ j} 
-                            className="Cols"
-                            style={{ background: this.changeBackground(square) }}>
-                            </div>
+                          <div 
+                          key={'j'+ j} 
+                          className="Cols"
+                          style={{ background: this.changeBackground(square) }}>
+                          </div>
                         )
                     })}
                 </div>

@@ -1,4 +1,4 @@
-import { createArray, updatedFoodGrid, generateRandomFood } from './utils'
+import { createGameBoard, moveSnake, updateGrid, createEmptyGameBoard } from './utils'
 import React, { Component } from 'react';
 import './App.css';
 
@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   
   state = {
-    grid: updatedFoodGrid(createArray(30), generateRandomFood(30))
+    grid: createGameBoard(30)
   }
 
   render() {
@@ -42,7 +42,12 @@ class App extends Component {
     index === 1 ? '#fff' : '#34495e'
 
   handleKeyPress = event => {
-      console.log(event)
+    const { grid } = this.state
+    const newArray = moveSnake(grid, event)
+    const emptyGrid = createEmptyGameBoard(30)
+    this.setState({
+      grid: updateGrid(emptyGrid, newArray)
+    })
   }
 
 }

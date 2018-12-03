@@ -1,0 +1,19 @@
+.Board {
+    position: relative;
+    margin: 20px auto;
+}
+
+.Rows { 
+    height: 20px; 
+    display: block;
+    margin: 0 auto
+}
+
+.Cols {
+    height: 20px;
+    width: 20px;
+    /* border: 0.5px solid #6d7780; */
+    display: inline-block;
+    background: #34495e;
+    color: #6d7780
+}

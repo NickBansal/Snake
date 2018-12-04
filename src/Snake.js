@@ -16,12 +16,11 @@ class App extends Component {
   
   state = {
     grid: createEmptyGameBoard(25),
-    snake: [[15, 15]],
+    // snake: [[12, 12]],
     game: false,
     score: 0,
     movement: null,
-    gameOver: false,
-    direction: null
+    gameOver: false
   }
 
   render() {
@@ -56,7 +55,7 @@ class App extends Component {
           <div id="ResetModal">
             <h1>Game Over</h1>
             <h2>Final Score: {score}</h2>
-            <button onClick={() => this.handleClick()}>Reset</button>
+            <button onClick={() => this.handleClick()}>RESET</button>
           </div>
         }
       </div>
@@ -70,12 +69,12 @@ class App extends Component {
       this.interval = setInterval(() => {
         const newGrid = createEmptyGameBoard(25)
         const newSnake = moveSnake(snake, event) 
-        this.snakeMovement(newSnake, newGrid, snake, event)
-      }, 100)
+        this.snakeMovement(newSnake, newGrid, snake)
+      }, 80)
     }
   }
   
-  snakeMovement = (newSnake, newGrid, snakeBody, direction) => {
+  snakeMovement = (newSnake, newGrid, snakeBody) => {
     const { food, snake } = this.state
     const head = newSnake[newSnake.length - 1]
     const body = snakeBody.slice(0,-1)
@@ -86,8 +85,7 @@ class App extends Component {
         grid: updateGameBoard(newGrid, newSnake, newFood), 
         snake: newSnake,
         food: newFood,
-        score: this.state.score + 1,
-        direction,
+        score: this.state.score + 1
       })
     }
     if (checkSnakeHitWalls(head) || checkSnakeHitItself(head, body)) {
@@ -99,15 +97,14 @@ class App extends Component {
     } else {
       this.setState({
         grid: updateGameBoard(newGrid, newSnake, food), 
-        snake: newSnake,
-        direction
+        snake: newSnake
       })
     }
   }
 
   handleClick = () => {
     clearInterval(this.interval)
-    const snake = [[15, 15]]
+    const snake = [[12, 12]]
     const food = generateRandomFood(25, snake)
     this.setState({
       grid: updateGameBoard(createEmptyGameBoard(25), snake, food),

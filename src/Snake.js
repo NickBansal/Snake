@@ -20,7 +20,8 @@ class App extends Component {
     game: false,
     score: 0,
     movement: null,
-    gameOver: false
+    gameOver: false,
+    direction: null
   }
 
   render() {
@@ -48,9 +49,9 @@ class App extends Component {
                 </div>
                 )
             })}
+        {!game && !gameOver && <button id="Start" onClick={() => this.handleClick()}>START</button>}
           </div>
           <h1 style={style}>Score: {score}</h1>
-        {!game && !gameOver && <button onClick={() => this.handleClick()}>START</button>}
         {this.state.gameOver && 
           <div id="ResetModal">
             <h1>Game Over</h1>
@@ -63,11 +64,14 @@ class App extends Component {
   }
 
   handleKeyPress = event => {
+    clearInterval(this.interval)
     const { snake, game } = this.state
     if (game) {
-      const newGrid = createEmptyGameBoard(25)
-      const newSnake = moveSnake(snake, event) 
-      this.snakeMovement(newSnake, newGrid, snake, event)
+      this.interval = setInterval(() => {
+        const newGrid = createEmptyGameBoard(25)
+        const newSnake = moveSnake(snake, event) 
+        this.snakeMovement(newSnake, newGrid, snake, event)
+      }, 100)
     }
   }
   
@@ -87,6 +91,7 @@ class App extends Component {
       })
     }
     if (checkSnakeHitWalls(head) || checkSnakeHitItself(head, body)) {
+      clearInterval(this.interval)
       this.setState({
         game: false,
         gameOver: true
@@ -101,6 +106,7 @@ class App extends Component {
   }
 
   handleClick = () => {
+    clearInterval(this.interval)
     const snake = [[15, 15]]
     const food = generateRandomFood(25, snake)
     this.setState({
@@ -112,7 +118,6 @@ class App extends Component {
       gameOver: false 
     })
   }
-
 }
 
 export default App;

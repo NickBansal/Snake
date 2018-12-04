@@ -13,6 +13,7 @@ This game is set up using Javascript in Visual Studio Code and testing is done w
 - [x] Randomly generate food
 - [x] Checks if food is caught and increases snake and regenerates food
 - [x] Increases score when food is caught
+= [-] Getting the snake to run automatically
 
 ## Instructions
 In order to get this game working on your local machine please check if node is installed by typing this command into your terminal

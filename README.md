@@ -31,5 +31,5 @@ $ npm start
 ```
 The game works with the Arrow keys on the keyboard.
 
-Author
+## Author
 Nick Bansal

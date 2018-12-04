@@ -113,7 +113,7 @@ describe('Util fucntions testing', () => {
     })
 
     // Check to see if the snake caught the food
-    it.only('Check to see if the snake caught the food', () => {
+    it('Check to see if the snake caught the food', () => {
         expect(checkSnakeCaughtFood([0, 1], [0, 2])).toBeFalsy()
         expect(checkSnakeCaughtFood([0, 1], [0, 1])).toBeTruthy()
     })

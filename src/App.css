@@ -23,3 +23,51 @@
   background: #34495e;
   color: #6d7780
 }
+
+#ResetModal {
+  max-height: calc(100% - 100px);
+  position: fixed;
+  top: 32%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 590px;
+  height: 230px;
+  background: rgba(0, 0, 0, 0.9);
+  color: whitesmoke;
+  animation: modalFade 0.5s 1 ease-in-out  
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+button {
+  /* margin-top: 40px; */
+  height: 70px;
+  width: 100px;
+  border-radius: 25px;
+  font-size: 25px;
+  border: 6px solid #2c3e50;
+  background: #34495e;
+  color: white
+}
+
+button:hover {
+  cursor: pointer;
+  background: #8995a0;
+  color: lightgray;
+  transform: translateY(-3px)
+}
+
+button:active {
+  transform: translateY(2px)
+}
+
+button:focus {
+  outline: none
+}

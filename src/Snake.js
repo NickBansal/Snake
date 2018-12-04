@@ -24,14 +24,15 @@ class App extends Component {
   }
 
   render() {
-    const { grid } = this.state
+    const { grid, gameOver, score, game } = this.state
+    const style = gameOver ? { filter: 'grayscale(100%) opacity(0.2)', transition: '1s' } : null
     return (
       <div 
       className="App" 
       onKeyDown={(e) => this.handleKeyPress(e.key)}
       tabIndex="0">
-        <h1>Snake</h1>
-          <div>
+        <h1 style={style}>Snake</h1>
+          <div style={style}>
             {grid.map((item, i) => {
               return (
                 <div key={'i'+ i} className="Rows">
@@ -48,9 +49,15 @@ class App extends Component {
                 )
             })}
           </div>
-          <h1>Score: {this.state.score}</h1>
-        <button onClick={() => this.handleClick()}>START</button>
-        {this.state.gameOver && <h1>Game Over</h1>}
+          <h1 style={style}>Score: {score}</h1>
+        {!game && !gameOver && <button onClick={() => this.handleClick()}>START</button>}
+        {this.state.gameOver && 
+          <div id="ResetModal">
+            <h1>Game Over</h1>
+            <h2>Final Score: {score}</h2>
+            <button onClick={() => this.handleClick()}>Reset</button>
+          </div>
+        }
       </div>
     );
   }

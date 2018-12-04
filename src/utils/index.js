@@ -14,10 +14,10 @@ export const updateGameBoard = (grid, changedArray, food) => {
     return grid
 }
 
-export const generateRandomFood = num => {
+export const generateRandomFood = (num, array) => {
     const i = Math.floor(Math.random() * num)
     const j = Math.floor(Math.random() * num)
-    return [i, j]
+    return array.some(item => item[0] === i && item[1] === j) ? generateRandomFood(num, array) : [i, j]
 }
 
 export const moveLeft = array => [array[0], array[1] - 1]

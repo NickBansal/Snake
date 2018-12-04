@@ -15,7 +15,7 @@ class App extends Component {
   
   state = {
     grid: createEmptyGameBoard(30),
-    snake: [[13, 15], [14, 15], [15, 15], [15, 16], [15, 17], [15, 18]],
+    snake: [[15, 15]],
     game: true
   }
 
@@ -62,12 +62,13 @@ class App extends Component {
   }
   
   snakeMovement = (newSnake, newGrid, snakeBody) => {
-    const { food } = this.state
+    const { food, snake } = this.state
     const head = newSnake[newSnake.length - 1]
     const body = snakeBody.slice(0,-1)
+
     if (checkSnakeCaughtFood(head, food)) {
       newSnake.push(food)
-      const newFood = generateRandomFood(31)
+      const newFood = generateRandomFood(30, snake)
       this.setState({
         grid: updateGameBoard(newGrid, newSnake, newFood), 
         snake: newSnake,
@@ -88,7 +89,7 @@ class App extends Component {
 
   handleClick = () => {
     const { grid, snake } = this.state
-    const food = generateRandomFood(31)
+    const food = generateRandomFood(30, snake)
     this.setState({
       grid: updateGameBoard(grid, snake, food),
       food

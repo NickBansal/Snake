@@ -9,7 +9,8 @@ import {
     moveSnake,
     checkSnakeHitWalls,
     checkSnakeHitItself,
-    checkSnakeCaughtFood
+    checkSnakeCaughtFood,
+    changeBackground
 } from '../utils'
 
 
@@ -112,8 +113,16 @@ describe('Util fucntions testing', () => {
     })
 
     // Check to see if the snake caught the food
-    it('Check to see if the snake caught the food', () => {
-        expect(checkSnakeCaughtFood([0, 1], [0, 2])).toBe(false)
-        expect(checkSnakeCaughtFood([0, 1], [0, 1])).toBe(true)
+    it.only('Check to see if the snake caught the food', () => {
+        expect(checkSnakeCaughtFood([0, 1], [0, 2])).toBeFalsy()
+        expect(checkSnakeCaughtFood([0, 1], [0, 1])).toBeTruthy()
+    })
+
+    // Modifies the background color
+    it('Modifies the background color', () => {
+        expect(changeBackground(0)).toBe('#34495e')
+        expect(changeBackground(1)).toBe('#fff')
+        expect(changeBackground(2)).toBe('red')
+        expect(changeBackground(3)).toBeTruthy()
     })
 })

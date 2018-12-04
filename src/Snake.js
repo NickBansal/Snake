@@ -1,5 +1,6 @@
 import { 
   createEmptyGameBoard, 
+  changeBackground,
   moveSnake, 
   updateGameBoard, 
   checkSnakeHitWalls,
@@ -14,9 +15,10 @@ import './App.css';
 class App extends Component {
   
   state = {
-    grid: createEmptyGameBoard(30),
+    grid: createEmptyGameBoard(25),
     snake: [[15, 15]],
-    game: true
+    game: true,
+    score: 0
   }
 
   render() {
@@ -36,7 +38,7 @@ class App extends Component {
                           <div 
                           key={'j'+ j} 
                           className="Cols"
-                          style={{ background: this.changeBackground(square) }}>
+                          style={{ background: changeBackground(square) }}>
                           </div>
                         )
                     })}
@@ -44,17 +46,15 @@ class App extends Component {
                 )
             })}
           </div>
+          <h1>Score: {this.state.score}</h1>
         <button onClick={() => this.handleClick()}>START</button>
       </div>
     );
   }
 
-  changeBackground = index => index === 2 ? 'red' :
-    index === 1 ? '#fff' : '#34495e'
-
   handleKeyPress = event => {
     const { snake, game } = this.state
-    const newGrid = createEmptyGameBoard(30)
+    const newGrid = createEmptyGameBoard(25)
     const newSnake = moveSnake(snake, event)
     if (game) {
       this.snakeMovement(newSnake, newGrid, snake)
@@ -68,11 +68,12 @@ class App extends Component {
 
     if (checkSnakeCaughtFood(head, food)) {
       newSnake.push(food)
-      const newFood = generateRandomFood(30, snake)
+      const newFood = generateRandomFood(25, snake)
       this.setState({
         grid: updateGameBoard(newGrid, newSnake, newFood), 
         snake: newSnake,
-        food: newFood
+        food: newFood,
+        score: this.state.score + 1
       })
     }
     if (checkSnakeHitWalls(head) || checkSnakeHitItself(head, body)) {
@@ -89,7 +90,7 @@ class App extends Component {
 
   handleClick = () => {
     const { grid, snake } = this.state
-    const food = generateRandomFood(30, snake)
+    const food = generateRandomFood(25, snake)
     this.setState({
       grid: updateGameBoard(grid, snake, food),
       food

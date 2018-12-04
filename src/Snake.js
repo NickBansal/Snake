@@ -7,7 +7,9 @@ class App extends Component {
   
   state = {
     grid: createEmptyGameBoard(30),
-    snake: [[15, 15], [15, 16], [15, 17]]
+    snake: [[15, 15], [15, 16], [15, 17], [15, 18]],
+    game: false,
+    direction: null  
   }
 
   render() {
@@ -44,13 +46,21 @@ class App extends Component {
     index === 1 ? '#fff' : '#34495e'
 
   handleKeyPress = event => {
-    const { snake } = this.state
-    const newSnake = moveSnake(snake, event)
-    const newGrid = createEmptyGameBoard(30)
-    this.setState({
-      grid: updateGameBoard(newGrid, newSnake), 
-      snake: newSnake
-    })
+    const { snake, direction } = this.state
+    if (clearInterval(this.state.changeMovement)) {
+      clearInterval(this.state.changeMovement)
+    }
+    
+    const changeMovement = setInterval(() => {
+      const newSnake = !direction ? moveSnake(snake, event) : moveSnake(snake, direction)
+      const newGrid = createEmptyGameBoard(30)
+      this.setState({
+        grid: updateGameBoard(newGrid, newSnake), 
+        snake: newSnake,
+        changeMovement
+      })
+    }, 100)
+
   }
 
   handleClick = () => {

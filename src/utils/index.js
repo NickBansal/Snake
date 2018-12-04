@@ -38,21 +38,25 @@ export const updatedSnakeArray = grid => {
 
 export const moveSnake = (snakeArray, direction) => {
     const lastSnakeArrayitem = snakeArray[snakeArray.length - 1]
-    if (direction === 'ArrowUp') {
+    switch (direction) {
+        case 'ArrowUp':
         snakeArray.shift()
         snakeArray.push(moveUp(lastSnakeArrayitem))
-    }
-    if (direction === 'ArrowDown') {
+        break; 
+        case 'ArrowDown':
         snakeArray.shift()
         snakeArray.push(moveDown(lastSnakeArrayitem))
-    }
-    if (direction === 'ArrowLeft') {
+        break;
+        case 'ArrowLeft':
         snakeArray.shift()
         snakeArray.push(moveLeft(lastSnakeArrayitem))
-    }
-    if (direction === 'ArrowRight') {
+        break;
+        case 'ArrowRight':
         snakeArray.shift()
         snakeArray.push(moveRight(lastSnakeArrayitem))
+        break;
+        default:
+        return snakeArray
     }
     return snakeArray
 }

@@ -3,7 +3,8 @@ import {
   moveSnake, 
   updateGameBoard, 
   checkSnakeHitWalls,
-  checkSnakeHitItself
+  checkSnakeHitItself,
+  generateRandomFood
 } from './utils'
 import React, { Component } from 'react';
 import './App.css';
@@ -60,6 +61,7 @@ class App extends Component {
   }
   
   snakeMovement = (newSnake, newGrid, snakeBody) => {
+    const { food } = this.state
     const head = newSnake[newSnake.length - 1]
     const body = snakeBody.slice(0,-1)
     if (checkSnakeHitWalls(head) || checkSnakeHitItself(head, body)) {
@@ -68,7 +70,7 @@ class App extends Component {
       })
     } else {
       this.setState({
-        grid: updateGameBoard(newGrid, newSnake), 
+        grid: updateGameBoard(newGrid, newSnake, food), 
         snake: newSnake,
       })
     }
@@ -76,8 +78,10 @@ class App extends Component {
 
   handleClick = () => {
     const { grid, snake } = this.state
+    const food = generateRandomFood(31)
     this.setState({
-      grid: updateGameBoard(grid, snake)
+      grid: updateGameBoard(grid, snake, food),
+      food
     })
   }
 

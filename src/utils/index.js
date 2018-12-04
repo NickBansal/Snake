@@ -6,10 +6,11 @@ export const createEmptyGameBoard = rows => {
     return arr;
 }
 
-export const updateGameBoard = (grid, changedArray) => {
+export const updateGameBoard = (grid, changedArray, food) => {
     changedArray.forEach(item => {
         grid[item[0]][item[1]] = 1
     })
+    grid[food[0]][food[1]] = 2
     return grid
 }
 

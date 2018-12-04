@@ -70,25 +70,3 @@ export const checkSnakeHitItself = (head, body) => body.some(item => item[0] ===
 
 
 
-
-
-
-
-
-
-
-// export const sortArrayValues = (a, b) => {
-//     if (a[0] > b[0]) return -1;
-//     else if (a[0] < b[0]) return 1;
-//     else if (a[0] === b[0]) {
-//         if (a[1] > b[1]) return -1;
-//         if (a[1] < b[1]) return 1;
-//     }
-//     return 0;
-// }
-
-
-
-
-
-

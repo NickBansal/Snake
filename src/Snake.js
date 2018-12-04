@@ -14,8 +14,7 @@ class App extends Component {
   state = {
     grid: createEmptyGameBoard(30),
     snake: [[13, 15], [14, 15], [15, 15], [15, 16], [15, 17], [15, 18]],
-    game: true,
-    direction: null
+    game: true
   }
 
   render() {
@@ -63,7 +62,6 @@ class App extends Component {
   snakeMovement = (newSnake, newGrid, snakeBody) => {
     const head = newSnake[newSnake.length - 1]
     const body = snakeBody.slice(0,-1)
-   
     if (checkSnakeHitWalls(head) || checkSnakeHitItself(head, body)) {
       this.setState({
         game: false

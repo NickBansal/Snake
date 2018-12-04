@@ -1,7 +1,6 @@
 import { 
-    createGameBoard, 
+    updateGameBoard, 
     createEmptyGameBoard,
-    updatedGridWithNewFood, 
     moveUp, 
     moveDown,
     moveRight,
@@ -20,29 +19,16 @@ describe('Util fucntions testing', () => {
         expect(createEmptyGameBoard(3)).toEqual([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
     })
 
-    // Creates a new grid
+    // Updates the gameboard with a snake
     it('Create Array functions creates a 2D array with a specified amount', () => {
-        expect(createGameBoard(1)).toEqual([[1]])
-        expect(createGameBoard(2)).toEqual([[0, 0], [0, 1]])
-        expect(createGameBoard(3)).toEqual([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
-        expect(createGameBoard(6)).toHaveLength(6)
+        const grid = createEmptyGameBoard(2)
+        const array = [[1, 1]]
+        expect(updateGameBoard(grid, array)).toEqual([[0, 0], [0, 1]])        
     })
-
-    // Updates the grid with a food item
-    it('Updates the array with a new food item', () => {
-        const newGrid = createGameBoard(3)
-        const foodArray1 = [1, 1]
-        expect(updatedGridWithNewFood(newGrid, foodArray1)).toEqual([[0, 0, 0], [0, 2, 0], [0, 0, 0]])
-    })
-    it('Updates the array with a new food item', () => {
-        const newGrid = createGameBoard(3)
-        const foodArray2 = [1, 2]
-        expect(updatedGridWithNewFood(newGrid, foodArray2)).toEqual([[0, 0, 0], [0, 1, 2], [0, 0, 0]])
-    })
-    it('Updates the array with a new food item', () => {
-        const newGrid = createGameBoard(3)
-        const foodArray2 = [0, 0]
-        expect(updatedGridWithNewFood(newGrid, foodArray2)).toEqual([[2, 0, 0], [0, 1, 0], [0, 0, 0]])
+    it('Create Array functions creates a 2D array with a specified amount', () => {
+        const grid = createEmptyGameBoard(3)
+        const array = [[1, 1]]
+        expect(updateGameBoard(grid, array)).toEqual([[0, 0, 0], [0, 1, 0], [0, 0, 0]])        
     })
 
     // Moves the snake up
@@ -81,10 +67,24 @@ describe('Util fucntions testing', () => {
 
     // Moves the snake 
     it('Moves the snake in the specifies direction', () => {
-        const grid = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
-        expect(moveSnake(grid, 'ArrowUp')).toEqual([[0, 1]])
-        expect(moveSnake(grid, 'ArrowDown')).toEqual([[2, 1]])
-        expect(moveSnake(grid, 'ArrowLeft')).toEqual([[1, 0]])
-        expect(moveSnake(grid, 'ArrowRight')).toEqual([[1, 2]])
+        const snakeArray = [[1, 1], [1, 2]]
+        expect(moveSnake(snakeArray, 'ArrowUp')).toEqual([[1, 2], [0, 2]])
+        expect(moveSnake(snakeArray, 'ArrowDown')).toEqual([[0, 2], [1, 2]])
+        expect(moveSnake(snakeArray, 'ArrowLeft')).toEqual([[1, 2], [1, 1]])
+        expect(moveSnake(snakeArray, 'ArrowRight')).toEqual([[1, 1], [1, 2]])
+    })
+    it('Moves the snake in the specifies direction', () => {
+        const snakeArray = [[1, 1], [1, 2]]
+        expect(moveSnake(snakeArray, 'ArrowDown')).toEqual([[1, 2], [2, 2]])
+        expect(moveSnake(snakeArray, 'ArrowDown')).toEqual([[2, 2], [3, 2]])
+        expect(moveSnake(snakeArray, 'ArrowLeft')).toEqual([[3, 2], [3, 1]])
+        expect(moveSnake(snakeArray, 'ArrowRight')).toEqual([[3, 1], [3, 2]])
+    })
+    it('Moves the snake in the specifies direction', () => {
+        const snakeArray = [[1, 1], [1, 2], [1, 3]]
+        expect(moveSnake(snakeArray, 'ArrowRight')).toEqual([[1, 2], [1, 3], [1, 4]])
+        expect(moveSnake(snakeArray, 'ArrowUp')).toEqual([[1, 3], [1, 4], [0, 4]])
+        expect(moveSnake(snakeArray, 'ArrowRight')).toEqual([[1, 4], [0, 4], [0, 5]])
+        expect(moveSnake(snakeArray, 'ArrowDown')).toEqual([[0, 4], [0, 5], [1, 5]])
     })
 })

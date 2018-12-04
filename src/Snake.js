@@ -1,4 +1,4 @@
-import { createGameBoard, moveSnake, updateGrid, createEmptyGameBoard } from './utils'
+import { createEmptyGameBoard, moveSnake, updateGameBoard } from './utils'
 import React, { Component } from 'react';
 import './App.css';
 
@@ -6,7 +6,8 @@ import './App.css';
 class App extends Component {
   
   state = {
-    grid: createGameBoard(30)
+    grid: createEmptyGameBoard(30),
+    snake: [[15, 15], [15, 16], [15, 17]]
   }
 
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
                 )
             })}
           </div>
+        <button onClick={() => this.handleClick()}>START</button>
       </div>
     );
   }
@@ -42,11 +44,19 @@ class App extends Component {
     index === 1 ? '#fff' : '#34495e'
 
   handleKeyPress = event => {
-    const { grid } = this.state
-    const newArray = moveSnake(grid, event)
-    const emptyGrid = createEmptyGameBoard(30)
+    const { snake } = this.state
+    const newSnake = moveSnake(snake, event)
+    const newGrid = createEmptyGameBoard(30)
     this.setState({
-      grid: updateGrid(emptyGrid, newArray)
+      grid: updateGameBoard(newGrid, newSnake), 
+      snake: newSnake
+    })
+  }
+
+  handleClick = () => {
+    const { grid, snake } = this.state
+    this.setState({
+      grid: updateGameBoard(grid, snake)
     })
   }
 

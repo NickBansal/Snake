@@ -11,6 +11,7 @@ This game is set up using Javascript in Visual Studio Code and testing is done w
 - [x] Check to see if the snake hits the walls
 - [x] Check to see if the snake hits itself
 - [x] Randomly generate food
+- [-] Checks if food is caught and increases snake and regenerates food
 
 ## Instructions
 In order to get this game working on your local machine please check if node is installed by typing this command into your terminal

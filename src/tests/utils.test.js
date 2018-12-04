@@ -22,15 +22,17 @@ describe('Util fucntions testing', () => {
     })
 
     // Updates the gameboard with a snake
-    it('Create Array functions creates a 2D array with a specified amount', () => {
+    it('Updates the grid with a snake and food', () => {
         const grid = createEmptyGameBoard(2)
         const array = [[1, 1]]
-        expect(updateGameBoard(grid, array)).toEqual([[0, 0], [0, 1]])        
+        const food = [0, 0]
+        expect(updateGameBoard(grid, array, food)).toEqual([[2, 0], [0, 1]])        
     })
-    it('Create Array functions creates a 2D array with a specified amount', () => {
+    it('Updates the grid with a snake and food', () => {
         const grid = createEmptyGameBoard(3)
         const array = [[1, 1]]
-        expect(updateGameBoard(grid, array)).toEqual([[0, 0, 0], [0, 1, 0], [0, 0, 0]])        
+        const food = [0, 1]
+        expect(updateGameBoard(grid, array, food)).toEqual([[0, 2, 0], [0, 1, 0], [0, 0, 0]])        
     })
 
     // Moves the snake up

@@ -1,4 +1,10 @@
-import { createEmptyGameBoard, moveSnake, updateGameBoard } from './utils'
+import { 
+  createEmptyGameBoard, 
+  moveSnake, 
+  updateGameBoard, 
+  checkSnakeHitWalls,
+  checkSnakeHitItself
+} from './utils'
 import React, { Component } from 'react';
 import './App.css';
 
@@ -7,9 +13,9 @@ class App extends Component {
   
   state = {
     grid: createEmptyGameBoard(30),
-    snake: [[15, 15], [15, 16], [15, 17], [15, 18]],
-    game: false,
-    direction: null  
+    snake: [[13, 15], [14, 15], [15, 15], [15, 16], [15, 17], [15, 18]],
+    game: true,
+    direction: null
   }
 
   render() {
@@ -46,21 +52,28 @@ class App extends Component {
     index === 1 ? '#fff' : '#34495e'
 
   handleKeyPress = event => {
-    const { snake, direction } = this.state
-    if (clearInterval(this.state.changeMovement)) {
-      clearInterval(this.state.changeMovement)
+    const { snake, game } = this.state
+    const newGrid = createEmptyGameBoard(30)
+    const newSnake = moveSnake(snake, event)
+    if (game) {
+      this.snakeMovement(newSnake, newGrid, snake)
     }
-    
-    const changeMovement = setInterval(() => {
-      const newSnake = !direction ? moveSnake(snake, event) : moveSnake(snake, direction)
-      const newGrid = createEmptyGameBoard(30)
+  }
+  
+  snakeMovement = (newSnake, newGrid, snakeBody) => {
+    const head = newSnake[newSnake.length - 1]
+    const body = snakeBody.slice(0,-1)
+   
+    if (checkSnakeHitWalls(head) || checkSnakeHitItself(head, body)) {
+      this.setState({
+        game: false
+      })
+    } else {
       this.setState({
         grid: updateGameBoard(newGrid, newSnake), 
         snake: newSnake,
-        changeMovement
       })
-    }, 100)
-
+    }
   }
 
   handleClick = () => {

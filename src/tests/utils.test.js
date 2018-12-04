@@ -6,7 +6,9 @@ import {
     moveRight,
     moveLeft,
     updatedSnakeArray,
-    moveSnake
+    moveSnake,
+    checkSnakeHitWalls,
+    checkSnakeHitItself
 } from '../utils'
 
 
@@ -86,5 +88,23 @@ describe('Util fucntions testing', () => {
         expect(moveSnake(snakeArray, 'ArrowUp')).toEqual([[1, 3], [1, 4], [0, 4]])
         expect(moveSnake(snakeArray, 'ArrowRight')).toEqual([[1, 4], [0, 4], [0, 5]])
         expect(moveSnake(snakeArray, 'ArrowDown')).toEqual([[0, 4], [0, 5], [1, 5]])
+    })
+
+    // Check if snake has hit the walls
+    it('Check if snake has hit the walls', () => {
+        expect(checkSnakeHitWalls([0, 0])).toBe(false)
+        expect(checkSnakeHitWalls([0, -1])).toBe(true)
+        expect(checkSnakeHitWalls([1, 0])).toBe(false)
+        expect(checkSnakeHitWalls([-1, -1])).toBe(true)
+    })
+
+    it('Check to see if the snake hit itself', () => {
+        const body = [[0, 1], [0, 2], [0, 3]]
+        const head1 = [0, 4]
+        const head2 = [0, 0]
+        const head3 = [0, 1]
+        expect(checkSnakeHitItself(head1, body)).toBe(false)
+        expect(checkSnakeHitItself(head2, body)).toBe(false)
+        expect(checkSnakeHitItself(head3, body)).toBe(true)
     })
 })

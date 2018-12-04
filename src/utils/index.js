@@ -61,6 +61,11 @@ export const moveSnake = (snakeArray, direction) => {
     return snakeArray
 }
 
+export const checkSnakeHitWalls = array => array[0] < 0 || array[1] < 0 || array[0] > 29 || array[1] > 29 ? true : false 
+
+export const checkSnakeHitItself = (head, body) => body.some(item => item[0] === head[0] && item[1] === head[1]) 
+
+
 
 
 

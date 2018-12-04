@@ -4,6 +4,7 @@ import {
   updateGameBoard, 
   checkSnakeHitWalls,
   checkSnakeHitItself,
+  checkSnakeCaughtFood,
   generateRandomFood
 } from './utils'
 import React, { Component } from 'react';
@@ -64,6 +65,15 @@ class App extends Component {
     const { food } = this.state
     const head = newSnake[newSnake.length - 1]
     const body = snakeBody.slice(0,-1)
+    if (checkSnakeCaughtFood(head, food)) {
+      newSnake.push(food)
+      const newFood = generateRandomFood(31)
+      this.setState({
+        grid: updateGameBoard(newGrid, newSnake, newFood), 
+        snake: newSnake,
+        food: newFood
+      })
+    }
     if (checkSnakeHitWalls(head) || checkSnakeHitItself(head, body)) {
       this.setState({
         game: false

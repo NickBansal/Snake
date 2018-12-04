@@ -66,6 +66,9 @@ export const checkSnakeHitWalls = array => array[0] < 0 || array[1] < 0 || array
 
 export const checkSnakeHitItself = (head, body) => body.some(item => item[0] === head[0] && item[1] === head[1]) 
 
+export const checkSnakeCaughtFood = (head, food) => head[0] === food[0] && head[1] === food[1] ? true : false
+
+
 
 
 

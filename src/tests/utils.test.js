@@ -8,7 +8,8 @@ import {
     updatedSnakeArray,
     moveSnake,
     checkSnakeHitWalls,
-    checkSnakeHitItself
+    checkSnakeHitItself,
+    checkSnakeCaughtFood
 } from '../utils'
 
 
@@ -108,5 +109,11 @@ describe('Util fucntions testing', () => {
         expect(checkSnakeHitItself(head1, body)).toBe(false)
         expect(checkSnakeHitItself(head2, body)).toBe(false)
         expect(checkSnakeHitItself(head3, body)).toBe(true)
+    })
+
+    // Check to see if the snake caught the food
+    it('Check to see if the snake caught the food', () => {
+        expect(checkSnakeCaughtFood([0, 1], [0, 2])).toBe(false)
+        expect(checkSnakeCaughtFood([0, 1], [0, 1])).toBe(true)
     })
 })

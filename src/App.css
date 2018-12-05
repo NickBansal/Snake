@@ -31,7 +31,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 450px;
-  height: 230px;
+  height: 250px;
   background: rgba(0, 0, 0, 0.9);
   color: whitesmoke;
   animation: modalFade 0.5s 1 ease-in-out  
@@ -47,7 +47,7 @@
 }
 
 button {
-  height: 70px;
+  height: 50px;
   width: 100px;
   border-radius: 25px;
   font-size: 25px;
@@ -71,10 +71,15 @@ button:focus {
   outline: none
 }
 
-#Start {
+.Start {
   position: fixed;
   top: 32%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: none
+}
+
+.Easy {
+  border: none;
+  margin: 20px 
 }

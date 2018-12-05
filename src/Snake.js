@@ -18,7 +18,8 @@ class App extends Component {
     grid: createEmptyGameBoard(25),
     game: false,
     score: 0,
-    gameOver: false
+    gameOver: false,
+    speed: 100
   }
 
   render() {
@@ -46,15 +47,20 @@ class App extends Component {
                 </div>
                 )
             })}
-        {!game && !gameOver && <button id="Start" onClick={() => this.handleClick()}>START</button>}
-        {game && <p>Press any key to Pause/Resume</p>}
+        {!game && !gameOver && 
+        <div className="Start">
+          <button value='Easy' className="Easy" onClick={(e) => this.handleClick(e)}>EASY</button>
+          <button value='Hard' className="Easy" onClick={(e) => this.handleClick(e)}>HARD</button>
+        </div>}
+        {game && <p>Press Space to Pause/Resume</p>}
           </div>
           <h1 style={style}>Score: {score}</h1>
         {this.state.gameOver && 
           <div id="ResetModal">
             <h1>Game Over</h1>
             <h2>Final Score: {score}</h2>
-            <button onClick={() => this.handleClick()}>RESET</button>
+            <button value='Easy' className="Easy" onClick={(e) => this.handleClick(e)}>EASY</button>
+            <button value='Hard' className="Easy" onClick={(e) => this.handleClick(e)}>HARD</button>
           </div>
         }
       </div>
@@ -63,13 +69,13 @@ class App extends Component {
 
   handleKeyPress = event => {
     clearInterval(this.interval)
-    const { snake, game } = this.state
+    const { snake, game, speed } = this.state
     if (game) {
       this.interval = setInterval(() => {
         const newGrid = createEmptyGameBoard(25)
         const newSnake = moveSnake(snake, event) 
         this.snakeMovement(newSnake, newGrid, snake)
-      }, 80)
+      }, speed)
     }
   }
   
@@ -101,8 +107,9 @@ class App extends Component {
     }
   }
 
-  handleClick = () => {
+  handleClick = (event) => {
     clearInterval(this.interval)
+    const speed = event.target.value === 'Easy' ? 100 : 50
     const snake = [[12, 12]]
     const food = generateRandomFood(25, snake)
     this.setState({
@@ -111,7 +118,8 @@ class App extends Component {
       food,
       score: 0,
       game: true,
-      gameOver: false 
+      gameOver: false,
+      speed 
     })
   }
 }

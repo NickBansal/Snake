@@ -16,10 +16,8 @@ class App extends Component {
   
   state = {
     grid: createEmptyGameBoard(25),
-    // snake: [[12, 12]],
     game: false,
     score: 0,
-    movement: null,
     gameOver: false
   }
 
@@ -49,6 +47,7 @@ class App extends Component {
                 )
             })}
         {!game && !gameOver && <button id="Start" onClick={() => this.handleClick()}>START</button>}
+        {game && <p>Press any key to Pause/Resume</p>}
           </div>
           <h1 style={style}>Score: {score}</h1>
         {this.state.gameOver && 

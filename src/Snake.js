@@ -36,17 +36,17 @@ class App extends Component {
               return (
                 <div key={'i'+ i} className="Rows">
                     {item.map((square, j) => {
-                        return (
-                          <div 
-                          key={'j'+ j} 
-                          className="Cols"
-                          style={{ background: changeBackground(square) }}>
+                      return (
+                        <div 
+                        key={'j'+ j} 
+                        className="Cols"
+                        style={{ background: changeBackground(square) }}>
                           </div>
                         )
-                    })}
+                      })}
                 </div>
                 )
-            })}
+              })}
         {!game && !gameOver && 
         <div className="Start">
           <button value='Easy' className="Easy" onClick={(e) => this.handleClick(e)}>EASY</button>
@@ -66,6 +66,10 @@ class App extends Component {
       </div>
     );
   }
+  
+  // handleClick() {
+  //   textInput.current.focus();
+  // }
 
   handleKeyPress = event => {
     clearInterval(this.interval)
@@ -109,8 +113,8 @@ class App extends Component {
 
   handleClick = (event) => {
     clearInterval(this.interval)
-    const speed = event.target.value === 'Easy' ? 100 : 50
-    const snake = [[12, 12]]
+    const speed = event.target.value === 'Easy' ? 90 : 40
+    const snake = [[12, 13]]
     const food = generateRandomFood(25, snake)
     this.setState({
       grid: updateGameBoard(createEmptyGameBoard(25), snake, food),

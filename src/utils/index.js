@@ -68,11 +68,4 @@ export const checkSnakeHitItself = (head, body) => body.some(item => item[0] ===
 
 export const checkSnakeCaughtFood = (head, food) => head[0] === food[0] && head[1] === food[1] ? true : false
 
-export const changeBackground = index => index === 2 ? 'red' : index === 1 ? '#fff' : '#34495e'
-
-
-
-
-
-
-
+export const changeBackground = index => index === 2 ? 'red' : index === 1 ? '#bfcdda' : '#34495e'

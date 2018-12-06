@@ -52,13 +52,13 @@ button {
   border-radius: 25px;
   font-size: 25px;
   border: 6px solid #2c3e50;
-  background: #34495e;
+  background: #957DAD;
   color: white
 }
 
 button:hover {
   cursor: pointer;
-  background: #8995a0;
+  background: rgb(200, 170, 230);
   color: lightgray;
   transform: translateY(-3px)
 }

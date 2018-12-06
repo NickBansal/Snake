@@ -37,6 +37,10 @@
   animation: modalFade 0.5s 1 ease-in-out  
 }
 
+p {
+  margin: 0
+}
+
 @keyframes modalFade {
   from {
     opacity: 0

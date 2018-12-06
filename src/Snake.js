@@ -52,7 +52,9 @@ class App extends Component {
           <button value='Easy' className="Easy" onClick={(e) => this.handleClick(e)}>EASY</button>
           <button value='Hard' className="Easy" onClick={(e) => this.handleClick(e)}>HARD</button>
         </div>}
-        {game && <p>Press Space to Pause/Resume</p>}
+        {game && <div style={{ marginTop: '20px' }}>
+            <p>Press Space to Pause</p><p>Press the Arrow Keys to Resume</p>
+          </div>}
           </div>
           <h1 style={style}>Score: {score}</h1>
         {this.state.gameOver && 

@@ -23,10 +23,12 @@ class App extends Component {
   }
 
   render() {
+    
     const { grid, gameOver, score, game } = this.state
     const style = gameOver ? { filter: 'grayscale(100%) opacity(0.2)', transition: '1s' } : null
     return (
       <div 
+      refs="snake"
       className="App" 
       onKeyDown={(e) => this.handleKeyPress(e.key)}
       tabIndex="0">
@@ -69,10 +71,6 @@ class App extends Component {
     );
   }
   
-  // handleClick() {
-  //   textInput.current.focus();
-  // }
-
   handleKeyPress = event => {
     clearInterval(this.interval)
     const { snake, game, speed } = this.state

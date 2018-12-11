@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   render() {
-    
+    const butStyle = { background: '#957DAD' }
     const { grid, gameOver, score, game } = this.state
     const style = gameOver ? { filter: 'grayscale(100%) opacity(0.2)', transition: '1s' } : null
     return (
@@ -51,8 +51,8 @@ class App extends Component {
               })}
         {!game && !gameOver && 
         <div className="Start">
-          <button value='Easy' className="Easy" onClick={(e) => this.handleClick(e)}>EASY</button>
-          <button value='Hard' className="Easy" onClick={(e) => this.handleClick(e)}>HARD</button>
+          <button value='Easy' className="Easy" style={butStyle} onClick={(e) => this.handleClick(e)}>EASY</button>
+          <button value='Hard' className="Easy" style={butStyle} onClick={(e) => this.handleClick(e)}>HARD</button>
         </div>}
         {game && <div style={{ marginTop: '20px' }}>
             <p>Press Space to Pause</p><p>Press the Arrow Keys to Resume</p>

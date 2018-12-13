@@ -24,5 +24,11 @@ describe.only('<Snake />', () => {
     expect(wrapper.find('p').first().text()).toBe("Press Space to Pause")
     expect(wrapper.find('p').last().text()).toBe("Press the Arrow Keys to Resume")
   })
+  it('Shows new text when game is over', () => {
+    wrapper.setState({ gameOver: true, score: 2 })
+    expect(wrapper.find('div#ResetModal h1').text()).toBe('Game Over')
+    expect(wrapper.find('div#ResetModal h2').text()).toBe('Final Score: 2')
+    expect(wrapper.find('button').length).toBe(2)
+  })
 })
 

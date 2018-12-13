@@ -2,7 +2,7 @@
 
 This exercise creates the 'Snake' game coded in Javascript.
 
-This game is set up using Javascript in Visual Studio Code and testing is done with Jest.
+This game is set up using Javascript in Visual Studio Code and testing is done with Jest and Enzyme.
 
 ## Step-by-Step
 - [x] Create a game board to play on
